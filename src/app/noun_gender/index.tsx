@@ -41,7 +41,7 @@ export default function Index() {
 
   if (gameStarted && !currentWord) {
     return (
-      <View>
+      <View style={styles.container}>
         <Text>Game over 🎉</Text>
         <Text>
           Score: {score} / {words.length}
@@ -60,6 +60,8 @@ export default function Index() {
           guessGender={guessGender}
           guessedGender={guessedGender}
           nextWord={nextWord}
+          currentScore={score}
+          currentNumberWords={currentIndex}
         />
       )}
     </View>

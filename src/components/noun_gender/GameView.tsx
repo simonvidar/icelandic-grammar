@@ -5,15 +5,34 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    padding: 20,
   },
   titleText: {
-    marginTop: 40,
     fontSize: 24,
   },
   buttonContainer: {
     width: '100%',
-    marginTop: 40,
     paddingHorizontal: 20,
+  },
+  top: {
+    alignItems: 'center',
+    marginTop: 40,
+  },
+  feedbackText: {
+    marginTop: 16,
+    fontSize: 20,
+    minHeight: 28,
+  },
+  genderSection: {
+    flex: 1,
+    gap: 16,
+    justifyContent: 'center',
+  },
+  bottom: {
+    alignItems: 'center',
+    gap: 12,
+    paddingBottom: 20,
+    marginTop: 32,
   },
   genderButton: {
     backgroundColor: '#007AFF',
@@ -42,6 +61,9 @@ const styles = StyleSheet.create({
   incorrectGender: {
     backgroundColor: '#994c34',
   },
+  hidden: {
+    opacity: 0,
+  },
 });
 
 type GameViewProps = {
@@ -49,6 +71,8 @@ type GameViewProps = {
   guessGender: (guessedGender: Gender, correctGender: Gender) => void;
   guessedGender: Gender | '';
   nextWord: () => void;
+  currentScore: number;
+  currentNumberWords: number;
 };
 
 export default function GameView({
@@ -56,6 +80,8 @@ export default function GameView({
   guessGender,
   guessedGender,
   nextWord,
+  currentScore,
+  currentNumberWords,
 }: GameViewProps) {
   const guessMade = guessedGender !== '';
   const guessedCorrect = guessedGender === currentWord.gender;
@@ -79,52 +105,60 @@ export default function GameView({
 
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>{currentWord.word}</Text>
-      {guessedGender && (
-        <>
-          <Text style={styles.titleText}>
-            {guessedCorrect ? 'Correct!' : 'Incorrect!'}
-          </Text>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={nextWord}
-              style={styles.nextButton}
-              accessibilityLabel="Next word in exercise"
-            >
-              <Text style={styles.buttonText}>Next word</Text>
-            </TouchableOpacity>
+      <View style={styles.top}>
+        <Text style={styles.titleText}>{currentWord.word}</Text>
+
+        <Text style={styles.feedbackText}>
+          {guessedGender && (guessedCorrect ? 'Correct!' : 'Incorrect!')}
+        </Text>
+      </View>
+
+      <View style={styles.genderSection}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => guessGender('kk', currentWord.gender)}
+            style={buttonStyle('kk')}
+            accessibilityLabel="Masculine"
+            disabled={guessMade}
+          >
+            <Text style={styles.buttonText}>Masculine</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => guessGender('kvk', currentWord.gender)}
+            style={buttonStyle('kvk')}
+            accessibilityLabel="Feminine"
+            disabled={guessMade}
+          >
+            <Text style={styles.buttonText}>Feminine</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            onPress={() => guessGender('hk', currentWord.gender)}
+            style={buttonStyle('hk')}
+            accessibilityLabel="Neuter"
+            disabled={guessMade}
+          >
+            <Text style={styles.buttonText}>Neuter</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.bottom}>
+          <TouchableOpacity
+            onPress={nextWord}
+            style={[styles.nextButton, !guessedGender && styles.hidden]}
+            accessibilityLabel="Next word in exercise"
+          >
+            <Text style={styles.buttonText}>Next word</Text>
+          </TouchableOpacity>
+          <View>
+            <Text>
+              Current result: {currentScore} / {currentNumberWords}{' '}
+            </Text>
           </View>
-        </>
-      )}
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => guessGender('kk', currentWord.gender)}
-          style={buttonStyle('kk')}
-          accessibilityLabel="Masculine"
-          disabled={guessMade}
-        >
-          <Text style={styles.buttonText}>Masculine</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => guessGender('kvk', currentWord.gender)}
-          style={buttonStyle('kvk')}
-          accessibilityLabel="Feminine"
-          disabled={guessMade}
-        >
-          <Text style={styles.buttonText}>Feminine</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={() => guessGender('hk', currentWord.gender)}
-          style={buttonStyle('hk')}
-          accessibilityLabel="Neuter"
-          disabled={guessMade}
-        >
-          <Text style={styles.buttonText}>Neuter</Text>
-        </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
