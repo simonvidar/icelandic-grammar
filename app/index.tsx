@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from 'react-native'
 
 const styles = StyleSheet.create({
   container: {
@@ -9,14 +9,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 24,
   },
-});
+})
 
 export default function Index() {
   return (
-    <View
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <Text style={styles.titleText}>Icelandic Grammar Exercies</Text>
     </View>
-  );
+  )
 }
