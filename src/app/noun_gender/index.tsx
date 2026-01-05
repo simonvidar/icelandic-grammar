@@ -1,7 +1,9 @@
-import { loadGameWords } from '@/src/game/LoadGameWords'
-import { Gender, WordEntry } from '@/src/types/word'
-import { useEffect, useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { loadGameWords } from '@/src/game/LoadGameWords';
+import { Gender, WordEntry } from '@/src/types/word';
+import { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import GameView from '../components/noun_gender/GameView';
+import StartView from '../components/noun_gender/StartView';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,59 +14,33 @@ const styles = StyleSheet.create({
     marginTop: 40,
     fontSize: 24,
   },
-  descriptiveText: {
-    marginTop: 40,
-    fontSize: 18,
-  },
-  buttonContainer: {
-    width: '100%',
-    marginTop: 40,
-    paddingHorizontal: 20,
-  },
-  startButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 12,
-    paddingHorizontal: 44,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  genderButton: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 12,
-    paddingHorizontal: 64,
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-})
+});
 
 export default function Index() {
-  const [words, setWords] = useState<WordEntry[]>([])
+  const [words, setWords] = useState<WordEntry[]>([]);
 
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [score, setScore] = useState(0)
-  const [gameStarted, setGameStarted] = useState<boolean>(false)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [gameStarted, setGameStarted] = useState<boolean>(false);
+  const [guessedGender, setGuessedGender] = useState<Gender | ''>('');
 
   useEffect(() => {
-    loadGameWords().then(setWords)
-  }, [])
+    loadGameWords().then(setWords);
+  }, []);
 
-  const currentWord = words[currentIndex]
+  const currentWord = words[currentIndex];
+  const startGame = () => setGameStarted(true);
 
   function guessGender(guessedGender: Gender, correctGender: Gender) {
     if (guessedGender === correctGender) {
-      alert('Correct!')
-      setScore((s) => s + 1)
-    } else if (guessedGender !== correctGender) {
-      alert('Wrong!')
+      setScore((s) => s + 1);
     }
-    setCurrentIndex((i) => i + 1)
+    setGuessedGender(guessedGender);
+  }
+
+  function nextWord() {
+    setCurrentIndex((i) => i + 1);
+    setGuessedGender('');
   }
 
   if (gameStarted && !currentWord) {
@@ -75,62 +51,21 @@ export default function Index() {
           Score: {score} / {words.length}
         </Text>
       </View>
-    )
+    );
   }
 
   return (
     <View style={styles.container}>
       {!gameStarted ? (
-        <View style={styles.container}>
-          <Text style={styles.titleText}>Noun Gender Execercise</Text>
-          <Text style={styles.descriptiveText}>
-            Guess the gender of the noun{'\n'}
-            shown on the screen
-          </Text>
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => setGameStarted(true)}
-              style={styles.startButton}
-              accessibilityLabel="Start the noun gender exercise"
-            >
-              <Text style={styles.buttonText}>Start</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <StartView startGame={startGame} />
       ) : (
-        <View style={styles.container}>
-          <Text style={styles.titleText}>{currentWord.word}</Text>
-
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => guessGender('kk', currentWord.gender)}
-              style={styles.genderButton}
-              accessibilityLabel="Masculine"
-            >
-              <Text style={styles.buttonText}>Masculine</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => guessGender('kvk', currentWord.gender)}
-              style={styles.genderButton}
-              accessibilityLabel="Feminine"
-            >
-              <Text style={styles.buttonText}>Feminine</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              onPress={() => guessGender('hk', currentWord.gender)}
-              style={styles.genderButton}
-              accessibilityLabel="Neuter"
-            >
-              <Text style={styles.buttonText}>Neuter</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
+        <GameView
+          currentWord={currentWord}
+          guessGender={guessGender}
+          guessedGender={guessedGender}
+          nextWord={nextWord}
+        />
       )}
     </View>
-  )
+  );
 }
