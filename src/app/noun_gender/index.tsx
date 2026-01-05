@@ -1,5 +1,5 @@
-import { loadGameWords } from '@/game/LoadGameWords'
-import { Gender, WordEntry } from '@/types/word'
+import { loadGameWords } from '@/src/game/LoadGameWords'
+import { Gender, WordEntry } from '@/src/types/word'
 import { useEffect, useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 

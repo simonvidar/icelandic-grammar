@@ -1,7 +1,7 @@
-import { CHUNK_COUNT, WORDS_PER_ROUND } from '@/config/words'
-import loadRandomChunk from '@/data/LoadChunk'
-import type { WordEntry } from '@/types/word'
-import { randomInt } from '@/utils/random'
+import { CHUNK_COUNT, WORDS_PER_ROUND } from '@/src/config/words'
+import loadRandomChunk from '@/src/data/LoadChunk'
+import type { WordEntry } from '@/src/types/word'
+import { randomInt } from '@/src/utils/random'
 
 export async function loadGameWords(): Promise<WordEntry[]> {
   const used = new Set<string>()
