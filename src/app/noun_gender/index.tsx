@@ -2,17 +2,13 @@ import { loadGameWords } from '@/src/game/LoadGameWords';
 import { Gender, WordEntry } from '@/src/types/word';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import GameView from '../components/noun_gender/GameView';
-import StartView from '../components/noun_gender/StartView';
+import GameView from '../../components/noun_gender/GameView';
+import StartView from '../../components/noun_gender/StartView';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-  },
-  titleText: {
-    marginTop: 40,
-    fontSize: 24,
   },
 });
 
@@ -21,7 +17,7 @@ export default function Index() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [gameStarted, setGameStarted] = useState<boolean>(false);
+  const [gameStarted, setGameStarted] = useState(false);
   const [guessedGender, setGuessedGender] = useState<Gender | ''>('');
 
   useEffect(() => {
