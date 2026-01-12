@@ -1,7 +1,9 @@
+import GameOverView from '@/src/components/noun_gender/GameOverView';
+import { NUMBER_OF_LIVES } from '@/src/config/words';
 import { loadGameWords } from '@/src/game/LoadGameWords';
 import { Gender, WordEntry } from '@/src/types/word';
 import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import GameView from '../../components/noun_gender/GameView';
 import StartView from '../../components/noun_gender/StartView';
 
@@ -19,6 +21,7 @@ export default function Index() {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
   const [guessedGender, setGuessedGender] = useState<Gender | ''>('');
+  const [numberOfLives, setNumberOfLives] = useState(NUMBER_OF_LIVES);
 
   useEffect(() => {
     loadGameWords().then(setWords);
@@ -26,10 +29,25 @@ export default function Index() {
 
   const currentWord = words[currentIndex];
   const startGame = () => setGameStarted(true);
+  const resetGame = () => {
+    setGameStarted(true);
+    setNumberOfLives(NUMBER_OF_LIVES);
+    setGuessedGender('');
+    setScore(0);
+    setCurrentIndex(0);
+    loadGameWords().then(setWords);
+  };
+
+  const goToMenu = () => {
+    resetGame();
+    setGameStarted(false);
+  };
 
   function guessGender(guessedGender: Gender, correctGender: Gender) {
     if (guessedGender === correctGender) {
       setScore((s) => s + 1);
+    } else if (guessedGender !== correctGender) {
+      setNumberOfLives((l) => l - 1);
     }
     setGuessedGender(guessedGender);
   }
@@ -39,14 +57,9 @@ export default function Index() {
     setGuessedGender('');
   }
 
-  if (gameStarted && !currentWord) {
+  if (gameStarted && (!currentWord || numberOfLives === 0)) {
     return (
-      <View style={styles.container}>
-        <Text>Game over 🎉</Text>
-        <Text>
-          Score: {score} / {words.length}
-        </Text>
-      </View>
+      <GameOverView restartGame={resetGame} goToMenu={goToMenu} score={score} />
     );
   }
 
@@ -61,7 +74,7 @@ export default function Index() {
           guessedGender={guessedGender}
           nextWord={nextWord}
           currentScore={score}
-          currentNumberWords={currentIndex}
+          numberOfLives={numberOfLives}
         />
       )}
     </View>

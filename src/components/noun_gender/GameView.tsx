@@ -61,8 +61,15 @@ const styles = StyleSheet.create({
   incorrectGender: {
     backgroundColor: '#994c34',
   },
+  score: {
+    fontSize: 18,
+  },
   hidden: {
     opacity: 0,
+  },
+  lives: { textAlign: 'left' },
+  livesContainer: {
+    width: '100%',
   },
 });
 
@@ -72,7 +79,7 @@ type GameViewProps = {
   guessedGender: Gender | '';
   nextWord: () => void;
   currentScore: number;
-  currentNumberWords: number;
+  numberOfLives: number;
 };
 
 export default function GameView({
@@ -81,7 +88,7 @@ export default function GameView({
   guessedGender,
   nextWord,
   currentScore,
-  currentNumberWords,
+  numberOfLives,
 }: GameViewProps) {
   const guessMade = guessedGender !== '';
   const guessedCorrect = guessedGender === currentWord.gender;
@@ -105,6 +112,14 @@ export default function GameView({
 
   return (
     <View style={styles.container}>
+      <View style={styles.livesContainer}>
+        <Text style={styles.lives}>
+          {Array(numberOfLives)
+            .fill('❤️')
+            .map((heart) => heart)}
+        </Text>
+      </View>
+
       <View style={styles.top}>
         <Text style={styles.titleText}>{currentWord.word}</Text>
 
@@ -154,9 +169,7 @@ export default function GameView({
             <Text style={styles.buttonText}>Next word</Text>
           </TouchableOpacity>
           <View>
-            <Text>
-              Current result: {currentScore} / {currentNumberWords}{' '}
-            </Text>
+            <Text style={styles.score}>Current score: {currentScore}</Text>
           </View>
         </View>
       </View>

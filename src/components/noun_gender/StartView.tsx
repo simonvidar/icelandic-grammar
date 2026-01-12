@@ -43,7 +43,9 @@ export default function StartView({ startGame }: StartViewProps) {
       <Text style={styles.titleText}>Noun Gender Execercise</Text>
       <Text style={styles.descriptiveText}>
         Guess the gender of the noun{'\n'}
-        shown on the screen
+        shown on the screen. You have 5 ❤️.{'\n'}
+        Each time you guess wrong,{'\n'}
+        you loose a ❤️.
       </Text>
 
       <View style={styles.buttonContainer}>
@@ -52,7 +54,7 @@ export default function StartView({ startGame }: StartViewProps) {
           style={styles.startButton}
           accessibilityLabel="Start the noun gender exercise"
         >
-          <Text style={styles.buttonText}>Start</Text>
+          <Text style={styles.buttonText}>Start game</Text>
         </TouchableOpacity>
       </View>
     </View>
