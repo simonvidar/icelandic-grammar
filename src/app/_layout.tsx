@@ -1,4 +1,4 @@
-import { Drawer } from 'expo-router/drawer'
+import { Drawer } from 'expo-router/drawer';
 
 export default function Layout() {
   return (
@@ -17,6 +17,13 @@ export default function Layout() {
           title: 'Noun gender',
         }}
       />
+      <Drawer.Screen
+        name="legal/index" // This is the name of the page and must match the url from root
+        options={{
+          drawerLabel: 'Legal information',
+          title: 'Legal information',
+        }}
+      />
     </Drawer>
-  )
+  );
 }
