@@ -1,0 +1,1 @@
+select * from public.ending_stats limit 1;
