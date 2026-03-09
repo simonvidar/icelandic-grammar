@@ -4,8 +4,8 @@ import { loadGameWords } from '@/src/game/LoadGameWords';
 import { Gender, WordEntry } from '@/src/types/word';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import GameView from '../../components/noun_gender/GameView';
-import StartView from '../../components/noun_gender/StartView';
+import GameView from '../../../components/noun_gender/GameView';
+import StartView from '../../../components/noun_gender/StartView';
 
 const styles = StyleSheet.create({
   container: {
