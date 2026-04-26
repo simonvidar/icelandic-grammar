@@ -1,8 +1,9 @@
+import DrawerContent from '@/src/components/DrawerContent';
 import { Drawer } from 'expo-router/drawer';
 
 export default function AppLayout() {
   return (
-    <Drawer>
+    <Drawer drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen
         name="index" // This is the name of the page and must match the url from root
         options={{

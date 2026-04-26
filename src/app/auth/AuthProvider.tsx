@@ -18,8 +18,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     // 1) Load initial session
     supabase.auth.getSession().then(({ data, error }) => {
-      if (!mounted) return;
-      if (error) console.log('getSession error:', error.message);
+      if (!mounted) {
+        return;
+      }
+      if (error) {
+        console.error('getSession error:', error.message);
+      }
       setSession(data.session ?? null);
       setLoading(false);
     });
