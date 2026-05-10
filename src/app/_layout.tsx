@@ -11,11 +11,6 @@ function RootNavigator() {
       return;
     }
 
-    if (!session) {
-      router.replace('/(auth)/login');
-    } else {
-      router.replace('/(app)');
-    }
   }, [session, loading, router]);
 
   return <Stack screenOptions={{ headerShown: false }} />;
