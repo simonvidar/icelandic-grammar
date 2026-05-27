@@ -1,4 +1,11 @@
-# Welcome to your Expo app 👋
+# Icelandic grammar exercises
+
+An app for training icelandic grammar. Right now only an exercise exist for guessing gender for nouns.
+See implementation at https://icelandic-grammar.netlify.app
+
+
+
+# Welcome to your Expo app
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
