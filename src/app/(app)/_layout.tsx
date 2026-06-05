@@ -51,6 +51,14 @@ export default function AppLayout() {
         }}
       />
       <Drawer.Screen
+        name="my_scores/index" // This is the name of the page and must match the url from root
+        options={{
+          drawerLabel: 'My scores',
+          title: 'My scores',
+          drawerItemStyle: user ? undefined : { display: 'none' },
+        }}
+      />
+      <Drawer.Screen
         name="legal/index" // This is the name of the page and must match the url from root
         options={{
           drawerLabel: 'Legal information',
