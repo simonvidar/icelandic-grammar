@@ -33,6 +33,7 @@ export const theme = {
     radius: {
         button: 10,
         card: 20,
+        list: 10,
         tabBar: 22,
     },
 
