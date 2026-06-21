@@ -21,6 +21,7 @@ export const theme = {
         secondaryPressed: '#E0E7FF',
 
         border: '#E5E7EB',
+        inputBorder: '#cbcdd0',
         shadow: '#000000',
     },
 
@@ -35,6 +36,7 @@ export const theme = {
         card: 20,
         list: 10,
         tabBar: 22,
+        input: 16
     },
 
     spacing: {
