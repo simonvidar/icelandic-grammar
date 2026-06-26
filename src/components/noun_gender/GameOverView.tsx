@@ -1,4 +1,5 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import AppButton from '../ui/AppButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -35,13 +36,13 @@ const styles = StyleSheet.create({
 
 type GameOverProps = {
   restartGame: () => void;
-  goToMenu: () => void;
+  goToHome: () => void;
   score: number;
 };
 
 export default function GameOver({
   restartGame,
-  goToMenu,
+  goToHome,
   score,
 }: GameOverProps) {
   return (
@@ -49,22 +50,17 @@ export default function GameOver({
       <Text style={styles.titleText}>Game over</Text>
       <Text style={styles.scoreText}>Score: {score}</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        <AppButton
           onPress={restartGame}
-          style={styles.button}
           accessibilityLabel="Start the noun gender exercise again"
         >
-          <Text style={styles.buttonText}>Restart game</Text>
-        </TouchableOpacity>
+          Restart game
+        </AppButton>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          onPress={goToMenu}
-          style={styles.button}
-          accessibilityLabel="Go to menu"
-        >
-          <Text style={styles.buttonText}>Go to menu</Text>
-        </TouchableOpacity>
+        <AppButton onPress={goToHome} accessibilityLabel="Go to home">
+          Go to home
+        </AppButton>
       </View>
     </View>
   );

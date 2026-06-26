@@ -43,7 +43,7 @@ begin
   into
     v_word_id,
     v_lemma
-  from public.select_random_word_for_difficulty(p_difficulty) sr;
+  from public.select_random_word_for_difficulty(p_difficulty, v_session_id) sr;
 
   insert into public.session_words 
     (session_id, word_id, order_index)

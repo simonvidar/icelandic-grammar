@@ -23,6 +23,25 @@ export const theme = {
         border: '#E5E7EB',
         inputBorder: '#cbcdd0',
         shadow: '#000000',
+
+        difficultyButtonBackgrounds: {
+            very_easy: '#eef8eb',
+            easy: '#eef1f8',
+            medium: '#fdf8ed',
+            hard: '#faeaeb'
+        },
+        difficultyButtonColors: {
+            very_easy: '#199225',
+            easy: '#0A57C9',
+            medium: '#F8AB12',
+            hard: '#D8363D'
+        },
+        difficultyButtonBorderColors: {
+            very_easy: '#97d09d',
+            easy: '#85a8de',
+            medium: '#ffd786',
+            hard: '#f1a9ad'
+        },
     },
 
     fonts: {

@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
   dangerText: {
     color: theme.colors.danger,
   },
+  hidden: {
+    opacity: 0,
+  },
 });
 
 type AppButtonProps = {
@@ -43,6 +46,7 @@ type AppButtonProps = {
   onPress: () => void;
   accessibilityLabel?: string;
   variant?: 'primary' | 'secondary' | 'danger';
+  hidden?: boolean;
 };
 
 export default function AppButton({
@@ -50,6 +54,7 @@ export default function AppButton({
   onPress,
   accessibilityLabel,
   variant = 'primary',
+  hidden = false,
 }: AppButtonProps) {
   const buttonVariantStyle = {
     primary: styles.primaryButton,
@@ -66,7 +71,11 @@ export default function AppButton({
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles.button, buttonVariantStyle[variant]]}
+      style={[
+        styles.button,
+        buttonVariantStyle[variant],
+        (typeof hidden !== 'undefined' && hidden) === true && styles.hidden,
+      ]}
       accessibilityLabel={accessibilityLabel}
     >
       <Text style={[styles.buttonText, textVariantStyle[variant]]}>
