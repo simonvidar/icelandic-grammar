@@ -57,9 +57,9 @@ through Supabase RPC.
 
 Friend relationships and requests are modelled in PostgreSQL and exposed
 through dedicated views for incoming requests, outgoing requests and
-accepted friendships
+accepted friendships.
 
-### Authentication and access contro
+### Authentication and access control
 
 User authentication is handled through Supabase Auth. Database access is
 restricted with Row Level Security so that user-specific data is protected
