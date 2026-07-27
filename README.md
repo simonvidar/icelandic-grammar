@@ -1,57 +1,135 @@
-# Icelandic grammar exercises
+# Icelandic Grammar
 
-An app for training icelandic grammar. Right now only an exercise exist for guessing gender for nouns.
-See implementation at https://icelandic-grammar.netlify.app
+A full-stack learning app for practising Icelandic noun gender through
+data-driven exercises, score tracking and social features.
 
+Built with React Native, Expo, TypeScript, Supabase and PostgreSQL.
 
+[Open the live demo](https://icelandic-grammar.netlify.app/)
 
-# Welcome to your Expo app
+<p align="center">
+  <img src="images/home.png" alt="Home screen" width="250"/>&nbsp;&nbsp;
+  <img src="images/leaderboards.png" alt="Global leaderboard" width="250"/>&nbsp;&nbsp;
+  <img src="images/game.png" alt="Noun gender game" width="252"/>
+</p>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## About the project
 
-## Get started
+Icelandic nouns have three grammatical genders, and the correct gender is
+not always obvious to learners.
 
-1. Install dependencies
+The application turns noun-gender practice into short game sessions with
+several difficulty levels, immediate feedback, score history and optional
+social competition.
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+### Learning and gameplay
 
-   ```bash
-   npx expo start
-   ```
+- Four difficulty levels
+- Data-driven word selection
+- A dataset of more than 30,000 Icelandic nouns
+- Immediate answer feedback
+- Lives, scoring and completed game sessions
+- Personal score history
 
-In the output, you'll find options to open the app in a
+### Social features
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- Global leaderboards
+- Difficulty and time-period filters
+- User profiles and avatars
+- Friend search and friend requests
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Technical overview
 
-## Get a fresh project
+### Data-driven difficulty
 
-When you're ready, run:
+Words are selected based on their frequency in Icelandic and the statistical
+predictability of their endings.
 
-```bash
-npm run reset-project
+### Server-side game logic
+
+Game sessions, lives, scores and answer history are stored in PostgreSQL.
+Core game operations are implemented with PostgreSQL functions exposed
+through Supabase RPC.
+
+### Relational social system
+
+Friend relationships and requests are modelled in PostgreSQL and exposed
+through dedicated views for incoming requests, outgoing requests and
+accepted friendships
+
+### Authentication and access contro
+
+User authentication is handled through Supabase Auth. Database access is
+restricted with Row Level Security so that user-specific data is protected
+at the database level.
+
+## Technology
+
+| Part           | Technology                            |
+| -------------- | ------------------------------------- |
+| Application    | React Native, React, Expo             |
+| Language       | TypeScript                            |
+| Navigation     | Expo Router                           |
+| Backend        | Supabase, RPC functions               |
+| Database       | PostgreSQL                            |
+| Authentication | Supabase Auth                         |
+| Deployment     | Netlify                               |
+| Styling        | React Native StyleSheet, shared theme |
+
+## Architecture
+
+```text
+React Native / Expo application
+        │
+        ├── Expo Router navigation
+        ├── Supabase Authentication
+        └── Supabase client
+                  │
+                  ├── PostgreSQL tables and views
+                  ├── Row Level Security
+                  └── RPC functions for game and social logic
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Project status
 
-## Learn more
+The application is under active development. The noun-gender exercise,
+score history, global leaderboards, profiles and friend management are
+currently implemented.
 
-To learn more about developing your project with Expo, look at the following resources:
+The web version is available as a live demo. Native Android and iOS releases
+are planned for a later stage.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Roadmap
 
-## Join the community
+- Resume unfinished game sessions
+- Friends leaderboard
+- Score visibility controls and anonymous leaderboard entries
+- Profile settings
+- Icelandic-language interface
+- Overview of common noun endings by gender
+- Game-session statistics
+- Achievements
+- Native Android and iOS builds
 
-Join our community of developers creating universal apps.
+## Running locally
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Requirements
+
+- Node.js
+- npm
+- A Supabase project
+
+### Installation
+
+1. Clone the repository.
+2. Install the dependencies with `npm install`.
+3. Copy `.env.example` to `.env` and add your Supabase project values.
+4. Start the web application with `npm run web`.
+
+## Author
+Developed by Simon Hilmarsson.
+
+- GitHub: [simonvidar](https://github.com/simonvidar)
+- LinkedIn: [Simon Hilmarsson](https://www.linkedin.com/in/simonhilmarsson)
