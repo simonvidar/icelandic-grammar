@@ -7,11 +7,7 @@ Built with React Native, Expo, TypeScript, Supabase and PostgreSQL.
 
 [Open the live demo](https://icelandic-grammar.netlify.app/)
 
-<p align="center">
-  <img src="images/home.png" alt="Home screen" width="250"/>&nbsp;&nbsp;
-  <img src="images/leaderboards.png" alt="Global leaderboard" width="250"/>&nbsp;&nbsp;
-  <img src="images/game.png" alt="Noun gender game" width="252"/>
-</p>
+<p align="center"><img src="images/home.png" alt="Home screen" width="30%" /> <img src="images/leaderboards.png" alt="Global leaderboard" width="30%" /> <img src="images/game.png" alt="Noun gender game" width="30%" /></p>
 
 ## About the project
 
